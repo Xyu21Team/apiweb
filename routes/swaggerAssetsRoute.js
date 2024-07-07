@@ -10,8 +10,7 @@ const customCss = `
         display: none;
     }
     .swagger-ui .topbar:before {
-        content: "Rva - Api - Website
-         yaaa";
+        content: "Hanya Seseorang Yg mengagumi mu ~ Al";
         display: block;
         font-weight: bold;
         color: black;
