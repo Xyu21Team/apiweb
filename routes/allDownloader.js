@@ -7,6 +7,44 @@ const qs = require('qs')
 const yt = require('ytdl-core');
 const yts = require('yt-search');
 
+ async function search(query, type = 'track', limit = 20) {
+      return new Promise(async resolve => {
+         try {
+            const creds = await spotifyCreds()
+            if (!creds.status) return resolve(creds)
+            const json = await (await axios.get('https://api.spotify.com/v1/search?query=' + query + '&type=' + type + '&offset=0&limit=' + limit, {
+               headers: {
+                  Authorization: 'Bearer ' + creds.data.access_token
+               }
+            })).data
+            if (!json.tracks.items || json.tracks.items.length < 1) return resolve({
+               creator: 'Budy x creator ',
+               status: false,
+               msg: 'Music not found!'
+            })
+            let data = []
+            json.tracks.items.map(v => data.push({
+               title: v.album.artists[0].name + ' - ' + v.name,
+               duration: convert(v.duration_ms),
+               popularity: v.popularity + '%',
+               preview: v.preview_url,
+               url: v.external_urls.spotify
+            }))
+            resolve({
+               creator: 'Budy x creator ',
+               status: true,
+               data
+            })
+         } catch (e) {
+            resolve({
+               creator: 'Budy x creator ',
+               status: false,
+               msg: e.message
+            })
+         }
+      })
+ }
+
 async function mediafire(url) {
 	let res = await axios.get(url)
 	let get = cheerio.load(res.data)
