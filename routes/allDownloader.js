@@ -7,7 +7,7 @@ const qs = require('qs')
 const yt = require('ytdl-core');
 const yts = require('yt-search');
 
- async function search(query, type = 'track', limit = 20) {
+ async function spotify(query, type = 'track', limit = 20) {
       return new Promise(async resolve => {
          try {
             const creds = await spotifyCreds()
