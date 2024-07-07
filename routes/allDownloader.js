@@ -563,6 +563,7 @@ async function terabox(url) {
 }
 
 module.exports = {
+	spotify,
   mediafire,
   soundcloud,
   tiktok,
@@ -578,6 +579,23 @@ module.exports = {
   search,
   terabox
 }
+
+router.get('/spotify', async (req, res) => {
+    const query = req.query.query;
+    if (!query) {
+        return res.status(400).json({
+            status: 400,
+            message: "URL mediafire tidak diberikan!"
+        });
+    }
+    try {
+        const result = await spotify(query);
+        res.json(result);
+    } catch (error) {
+        console.error('Error fetching mediafire data:', error);
+        res.status(500).json({ error: 'Gagal mengambil data mediafire.' });
+    }
+});
 
 router.get('/mediafire', async (req, res) => {
     const url = req.query.url;
