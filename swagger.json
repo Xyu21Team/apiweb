@@ -698,7 +698,7 @@
         "description": "Endpoint untuk download dari Mediafire",
         "parameters": [
           {
-            "name": "url",
+            "name": "query",
             "in": "query",
             "required": true,
             "schema": {
