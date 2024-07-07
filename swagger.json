@@ -690,6 +690,30 @@
         }
       }
     },
+
+        "/spotify": {
+      "get": {
+        "tags": ["Downloader"],
+        "summary": "Download dari spotify",
+        "description": "Endpoint untuk download dari Mediafire",
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "name lagu"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/mediafire": {
       "get": {
         "tags": ["Downloader"],
