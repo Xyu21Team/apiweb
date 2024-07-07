@@ -27,18 +27,18 @@ async function convert(ms) {
                }
             })).data
             if (!json.access_token) return resolve({
-               creator: 'Budy x creator ',
+               creator: ' Rva - Apis👑 ',
                status: false,
                msg: 'Can\'t generate token!'
             })
             resolve({
-               creator: 'Budy x creator ',
+               creator: ' Rva - Apis👑 ',
                status: true,
                data: json
             })
          } catch (e) {
             resolve({
-               creator: 'Budy x creator ',
+               creator: ' Rva - Apis👑 ',
                status: false,
                msg: e.message
             })
@@ -60,7 +60,7 @@ async function convert(ms) {
                }
             })).data
             if (!json.tracks.items || json.tracks.items.length < 1) return resolve({
-               creator: 'Budy x creator ',
+               creator: ' Rva - Apis👑 ',
                status: false,
                msg: 'Music not found!'
             })
@@ -73,13 +73,13 @@ async function convert(ms) {
                url: v.external_urls.spotify
             }))
             resolve({
-               creator: 'Budy x creator ',
+               creator: ' Rva - Apis👑  ',
                status: true,
                data
             })
          } catch (e) {
             resolve({
-               creator: 'Budy x creator ',
+               creator: ' Rva - Apis👑 ',
                status: false,
                msg: e.message
             })
