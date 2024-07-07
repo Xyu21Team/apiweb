@@ -7,6 +7,48 @@ const qs = require('qs')
 const yt = require('ytdl-core');
 const yts = require('yt-search');
 
+
+
+  process.env['SPOTIFY_CLIENT_ID'] = '4c4fc8c3496243cbba99b39826e2841f'
+process.env['SPOTIFY_CLIENT_SECRET'] = 'd598f89aba0946e2b85fb8aefa9ae4c8'
+
+async function convert(ms) {
+      var minutes = Math.floor(ms / 60000)
+      var seconds = ((ms % 60000) / 1000).toFixed(0)
+      return minutes + ':' + (seconds < 10 ? '0' : '') + seconds
+   }
+   
+  async function spotifyCreds() {
+      return new Promise(async resolve => {
+         try {
+            const json = await (await axios.post('https://accounts.spotify.com/api/token', 'grant_type=client_credentials', {
+               headers: {
+                  Authorization: 'Basic ' + Buffer.from(process.env.SPOTIFY_CLIENT_ID + ':' + process.env.SPOTIFY_CLIENT_SECRET).toString('base64')
+               }
+            })).data
+            if (!json.access_token) return resolve({
+               creator: 'Budy x creator ',
+               status: false,
+               msg: 'Can\'t generate token!'
+            })
+            resolve({
+               creator: 'Budy x creator ',
+               status: true,
+               data: json
+            })
+         } catch (e) {
+            resolve({
+               creator: 'Budy x creator ',
+               status: false,
+               msg: e.message
+            })
+         }
+      })
+   }
+
+
+
+
  async function spotify(query, type = 'track', limit = 20) {
       return new Promise(async resolve => {
          try {
