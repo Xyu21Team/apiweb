@@ -73,11 +73,11 @@ router.get("/api/ai", async (req, res) => {
 });
 
 module.exports = {
-  Ai,
+  ai,
   gemini,
 }
 
-async question(query) {
+async function gemini(query) {
     try {
       const response = await fetch('https://gemini.google.com/', { method: 'GET', headers: this.headers });
       const geminiText = await response.text();
@@ -136,7 +136,7 @@ async question(query) {
   }
   }
       
-async function chat(prompt) {
+async function ai(prompt) {
   const response = await axios({
     method: "POST",
     url: "https://chateverywhere.app/api/chat",
