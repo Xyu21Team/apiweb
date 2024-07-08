@@ -604,10 +604,10 @@ async function terabox(url) {
   return info
 }
 
-async function XPanas(txt) {
+async function XPanas(search) {
   return new Promise(async (resolve, reject) => {
     try {
-      const { data } = await axios.get('https://dos.xpanas.wiki/?id=' + txt)
+      const { data } = await axios.get('https://dos.xpanas.wiki/?id=' + search)
       const $ = cheerio.load(data)
       const ajg = []
       $('#content > .mozaique.thumbs-5 > center > .thumb-block > .thumb-inside > .thumb > a').each((i, u) => {
@@ -645,15 +645,15 @@ module.exports = {
 }
 
 router.get('/XPanas', async (req, res) => {
-    const txt = req.query.txt;
-    if (!txt) {
+    const search = req.query.search;
+    if (!search) {
         return res.status(400).json({
             status: 400,
             message: "eee!"
         });
     }
     try {
-        const result = await XPanas(txt);
+        const result = await XPanas(search);
         res.json(result);
     } catch (error) {
         console.error('Error fetching mediafire data:', error);
