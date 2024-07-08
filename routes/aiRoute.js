@@ -2,7 +2,7 @@ const express = require("express");
 const axios = require("axios");
 import fetch from 'node-fetch';
 
-class Gemini {
+class gemini {
   constructor(key, apikey) {
     this.conversation_id = '';
     this.response_id = '';
@@ -29,7 +29,7 @@ class Gemini {
 
 const router = express.Router();
 
-router.get("/api/gemini", async (req, res) => {
+router.get("/gemini", async (req, res) => {
   const query = req.query.query;
   if (!query) {
     return res.status(400).json({
@@ -51,7 +51,7 @@ router.get("/api/gemini", async (req, res) => {
 });
   
   
-router.get("/api/ai", async (req, res) => {
+router.get("/ai", async (req, res) => {
   const prompt = req.query.prompt;
   if (!prompt) {
     return res.status(400).json({
