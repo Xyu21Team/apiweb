@@ -691,29 +691,6 @@
       }
     },
 
-        "/spotify": {
-      "get": {
-        "tags": ["Downloader"],
-        "summary": "Download dari spotify",
-        "description": "Endpoint untuk download dari Mediafire",
-        "parameters": [
-          {
-            "name": "query",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "name lagu"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
     "/mediafire": {
       "get": {
         "tags": ["Downloader"],
@@ -991,6 +968,32 @@
         }
       }
     },
+
+
+        "/spotify": {
+      "get": {
+        "tags": ["Search"],
+        "summary": "Search dari spotify",
+        "description": "Endpoint untuk search lagu Di Spotify",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "name lagu"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    
     "/api/igstalk": {
       "get": {
         "tags": ["Search"],
