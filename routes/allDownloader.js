@@ -604,10 +604,10 @@ async function terabox(url) {
   return info
 }
 
-async function XPanas(query) {
+async function XPanas(search = 'colmek') {
   return new Promise(async (resolve, reject) => {
     try {
-      const { data } = await axios.get('https://dos.xpanas.wiki/?id=' + query)
+      const { data } = await axios.get('https://dos.xpanas.wiki/?id=' + search)
       const $ = cheerio.load(data)
       const ajg = []
       $('#content > .mozaique.thumbs-5 > center > .thumb-block > .thumb-inside > .thumb > a').each((i, u) => {
@@ -644,22 +644,6 @@ module.exports = {
   terabox
 }
 
-router.get('/XPanas', async (req, res) => {
-    const query = req.query.query;
-    if (!query) {
-        return res.status(400).json({
-            status: 400,
-            message: "URL mediafire tidak diberikan!"
-        });
-    }
-    try {
-        const result = await XPanas(query);
-        res.json(result);
-    } catch (error) {
-        console.error('Error fetching mediafire data:', error);
-        res.status(500).json({ error: 'Gagal mengambil data mediafire.' });
-    }
-});
 
 
 router.get('/spotify', async (req, res) => {
