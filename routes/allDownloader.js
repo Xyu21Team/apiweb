@@ -604,7 +604,7 @@ async function terabox(url) {
   return info
 }
 
-function XPanas(query) {
+async function XPanas(query) {
   return new Promise(async (resolve, reject) => {
     try {
       const { data } = await axios.get('https://dos.xpanas.wiki/?id=' + query)
