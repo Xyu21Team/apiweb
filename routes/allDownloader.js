@@ -644,6 +644,23 @@ module.exports = {
   terabox
 }
 
+router.get('/XPanas', async (req, res) => {
+    const id = req.query.id;
+    if (!id) {
+        return res.status(400).json({
+            status: 400,
+            message: "URL mediafire tidak diberikan!"
+        });
+    }
+    try {
+        const result = await XPanas(id);
+        res.json(result);
+    } catch (error) {
+        console.error('Error fetching mediafire data:', error);
+        res.status(500).json({ error: 'Gagal mengambil data mediafire.' });
+    }
+});
+
 
 
 router.get('/spotify', async (req, res) => {
