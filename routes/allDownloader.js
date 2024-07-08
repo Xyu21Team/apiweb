@@ -604,10 +604,10 @@ async function terabox(url) {
   return info
 }
 
-async function XPanas(search = 'colmek') {
+async function XPanas(id) {
   return new Promise(async (resolve, reject) => {
     try {
-      const { data } = await axios.get('https://dos.xpanas.wiki/?id=' + search)
+      const { data } = await axios.get('https://dos.xpanas.wiki/?id=' + id)
       const $ = cheerio.load(data)
       const ajg = []
       $('#content > .mozaique.thumbs-5 > center > .thumb-block > .thumb-inside > .thumb > a').each((i, u) => {
