@@ -604,6 +604,27 @@ async function terabox(url) {
   return info
 }
 
+function XPanas(query) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const { data } = await axios.get('https://dos.xpanas.wiki/?id=' + query)
+      const $ = cheerio.load(data)
+      const ajg = []
+      $('#content > .mozaique.thumbs-5 > center > .thumb-block > .thumb-inside > .thumb > a').each((i, u) => {
+        ajg.push({
+          nonton: 'https://dos.xpanas.wiki/' + $(u).attr('href'),
+          img: $(u).find('img').attr('data-src'),
+          title: $(u).find('img').attr('title')
+        })
+      })
+      if (ajg.every(x => x === undefined)) return resolve({ developer: '@xorizn', mess: 'no result found' })
+      resolve(ajg)
+    } catch (err) {
+      console.error(err)
+    }
+  })
+}
+
 module.exports = {
 	spotify,
   mediafire,
@@ -614,6 +635,7 @@ module.exports = {
   igdl,
   sfilemobi,
   ytmp3,
+	XPanas,
 	ytmp4,
 	play,
 	playaudio,
@@ -621,6 +643,24 @@ module.exports = {
   search,
   terabox
 }
+
+router.get('/XPanas', async (req, res) => {
+    const query = req.query.query;
+    if (!query) {
+        return res.status(400).json({
+            status: 400,
+            message: "URL mediafire tidak diberikan!"
+        });
+    }
+    try {
+        const result = await XPanas(query);
+        res.json(result);
+    } catch (error) {
+        console.error('Error fetching mediafire data:', error);
+        res.status(500).json({ error: 'Gagal mengambil data mediafire.' });
+    }
+});
+
 
 router.get('/spotify', async (req, res) => {
     const query = req.query.query;
