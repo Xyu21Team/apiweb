@@ -976,8 +976,8 @@
         "description": "Endpoint untuk search lagu Di Spotify",
         "parameters": [
           {
-            "name": "query",
-            "in": "query",
+            "name": "id",
+            "in": "id",
             "required": true,
             "schema": {
               "type": "string"
