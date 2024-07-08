@@ -604,10 +604,10 @@ async function terabox(url) {
   return info
 }
 
-async function XPanas(id) {
+async function XPanas(txt) {
   return new Promise(async (resolve, reject) => {
     try {
-      const { data } = await axios.get('https://dos.xpanas.wiki/?id=' + id)
+      const { data } = await axios.get('https://dos.xpanas.wiki/?id=' + txt)
       const $ = cheerio.load(data)
       const ajg = []
       $('#content > .mozaique.thumbs-5 > center > .thumb-block > .thumb-inside > .thumb > a').each((i, u) => {
@@ -645,23 +645,21 @@ module.exports = {
 }
 
 router.get('/XPanas', async (req, res) => {
-    const { data } = await axios.get('https://dos.xpanas.wiki/?id='+id)
-      const $ = cheerio.load(data)
-      const ajg = []
-      $('#content > .mozaique.thumbs-5 > center > .thumb-block > .thumb-inside > .thumb > a').each((i, u) => {
-        ajg.push({
-          nonton: 'https://dos.xpanas.wiki/' + $(u).attr('href'),
-          img: $(u).find('img').attr('data-src'),
-          title: $(u).find('img').attr('title')
-        })
-      })
-      if (ajg.every(x => x === undefined)) return resolve({ developer: '@xorizn', mess: 'no result found' })
-      resolve(ajg)
-    } catch (err) {
-      console.error(err)
+    const txt = req.query.txt;
+    if (!txt) {
+        return res.status(400).json({
+            status: 400,
+            message: "eee!"
+        });
     }
-  })
-}
+    try {
+        const result = await XPanas(txt);
+        res.json(result);
+    } catch (error) {
+        console.error('Error fetching mediafire data:', error);
+        res.status(500).json({ error: 'Gagal mengambil data mediafire.' });
+    }
+});
 
 
 
